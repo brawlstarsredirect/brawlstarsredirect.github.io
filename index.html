@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>Brawl Stars</title>
+<style type="text/css">
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    .scare {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        cursor: pointer;
+    }
+
+    #bsn-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    video#video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: none;
+    }
+
+    video#video::-webkit-media-controls-enclosure {
+        display:none !important;
+    }
+</style>
+</head>
+<body>
+
+<div class="scare">
+    <img id="bsn-img" src="bsn.jpg">
+    <video id="video" loop>
+        <source src="https://web.archive.org/web/20210326002342im_/https://pnrtscr.com/video.mp4" type="video/mp4">
+    </video>
+</div>
+
+<script type="text/javascript">
+    const video = document.getElementById("video");
+    const bsnImg = document.getElementById("bsn-img");
+    let isPlaying = false;
+
+    function enterFullscreen() {
+        const element = document.documentElement;
+        if(element.requestFullscreen) element.requestFullscreen();
+        else if(element.mozRequestFullScreen) element.mozRequestFullScreen();
+        else if(element.webkitRequestFullscreen) element.webkitRequestFullscreen();
+        else if(element.msRequestFullscreen) element.msRequestFullscreen();
+    }
+
+    function startPlayback() {
+        if(isPlaying) return;
+        
+        enterFullscreen();
+        bsnImg.style.display = 'none';
+        video.style.display = 'block';
+        video.play();
+        isPlaying = true;
+    }
+
+    bsnImg.addEventListener('click', startPlayback);
+    video.addEventListener('click', enterFullscreen);
+</script>
+
+</body>
+</html>
